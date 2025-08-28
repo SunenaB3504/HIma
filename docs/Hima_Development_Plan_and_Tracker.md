@@ -99,8 +99,8 @@ Use this table to update status. Update `Status` as Not started / In progress / 
 
 | Phase | Key deliverable (MVP) | Start | End | Status | Notes |
 |---|---:|---:|---:|---:|---|
-| Phase 0 | Project skeleton, onboarding | 2025-08-28 | 2025-09-03 | Not started |  |
-| Phase 1 | Asset pipeline + sample assets | 2025-09-04 | 2025-09-18 | Not started |  |
+| Phase 0 | Project skeleton, onboarding, DI, navigation | 2025-08-28 | 2025-09-03 | Done | Project skeleton existed; added Hilt DI, Nav Compose, Onboarding & Main Menu screens. |
+| Phase 1 | Asset pipeline + sample assets + app-side demo | 2025-09-04 | 2025-09-18 | Done | JSON schemas + validator + sample assets created and validated; AssetLoader and audio/TTS demo wired into app. |
 | Phase 2 | Alphabet & Combined Sounds | 2025-09-19 | 2025-10-09 | Not started |  |
 | Phase 3 | Story library & reader | 2025-10-10 | 2025-11-07 | Not started |  |
 | Phase 4 | Post-story activities & gamification | 2025-11-08 | 2025-11-22 | Not started |  |
