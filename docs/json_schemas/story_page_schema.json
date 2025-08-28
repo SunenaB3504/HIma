@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StoryPage",
+  "type": "object",
+  "required": ["storyId", "pageNo", "text", "narration"],
+  "properties": {
+    "storyId": {"type": "string"},
+    "pageNo": {"type": "integer"},
+    "text": {"type": "string"},
+    "emoji": {"type": "string"},
+    "narration": {"type": "string"},
+    "vocab": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["word", "meaning", "emoji", "audio"],
+        "properties": {
+          "word": {"type": "string"},
+          "meaning": {"type": "string"},
+          "emoji": {"type": "string"},
+          "audio": {"type": "string"}
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

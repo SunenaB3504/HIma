@@ -1,0 +1,8 @@
+{
+  "id": "ka_aa",
+  "base": "क",
+  "vowel": "ा",
+  "combined": "का",
+  "audio": "audio/combined/का.mp3",
+  "stroke_anim": "animations/combined/का.json"
+}

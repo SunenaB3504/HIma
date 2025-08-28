@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Letter",
+  "type": "object",
+  "required": ["id", "language", "char", "audio"],
+  "properties": {
+    "id": {"type": "string"},
+    "language": {"type": "string"},
+    "char": {"type": "string"},
+    "audio": {"type": "string"},
+    "stroke_anim": {"type": "string"},
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["word", "emoji", "audio"],
+        "properties": {
+          "word": {"type": "string"},
+          "emoji": {"type": "string"},
+          "audio": {"type": "string"}
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

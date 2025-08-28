@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CombinedSound",
+  "type": "object",
+  "required": ["id", "base", "vowel", "combined", "audio"],
+  "properties": {
+    "id": {"type": "string"},
+    "base": {"type": "string"},
+    "vowel": {"type": "string"},
+    "combined": {"type": "string"},
+    "audio": {"type": "string"},
+    "stroke_anim": {"type": "string"}
+  },
+  "additionalProperties": false
+}

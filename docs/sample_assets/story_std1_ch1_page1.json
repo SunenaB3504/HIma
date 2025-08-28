@@ -1,0 +1,10 @@
+{
+  "storyId": "std1_ch1_story1",
+  "pageNo": 1,
+  "text": "सुबह का समय था और सारा गांव जाग रहा था।",
+  "emoji": "📘",
+  "narration": "audio/stories/std1_ch1/story1/page1.mp3",
+  "vocab": [
+    {"word": "सुबह", "meaning": "morning", "emoji": "🌅", "audio": "audio/vocab/सुबह.mp3"}
+  ]
+}

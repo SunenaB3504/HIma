@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hima - DFD and UML Visualizations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .diagram {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .ascii-diagram {
+            font-family: 'Courier New', monospace;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .simple-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .box {
+            border: 2px solid #333;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            min-width: 120px;
+            text-align: center;
+        }
+        .arrow {
+            font-size: 20px;
+            color: #666;
+        }
+        .external {
+            background-color: #ffe6e6;
+        }
+        .process {
+            background-color: #e6f3ff;
+        }
+        .store {
+            background-color: #e6ffe6;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .flex-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .flex-row-center {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hima - Data Flow Diagram (DFD) and UML Visualizations</h1>
+    <p>Version: 1.0 | Date: August 28, 2025</p>
+
+    <div class="section">
+        <h2>Data Flow Diagram (DFD) for Hima</h2>
+        <h3>Overview</h3>
+        <p>This document describes the high-level data flows for Hima (short for Hindi Marathi), an offline Android app for children that teaches alphabets, combined sounds, and CBSE-based textbook stories with post-reading activities. The DFDs clarify system boundaries, external entities, major processes, data stores, and key data flows prior to implementation.</p>
+        <p><strong>Notes:</strong></p>
+        <ul>
+            <li>The app is 100% functional offline. All content (JSON, audio, emoji artwork) is bundled as static assets.</li>
+            <li>Audio assets are pre-generated during development (AI-assisted or professionally recorded) and packaged with the app.</li>
+            <li>Android on-device language packs (offline TTS / optional on-device voice recognition) may be used as a fallback only.</li>
+        </ul>
+
+        <h3>Legend</h3>
+        <ul>
+            <li><strong>External Entities:</strong> Entities outside the system boundary (users, content providers).</li>
+            <li><strong>Processes:</strong> Numbered functional modules that transform inputs to outputs.</li>
+            <li><strong>Data Stores:</strong> Persistent local storage (assets, databases, preferences).</li>
+            <li><strong>Data Flows:</strong> Named flows of data between entities, processes, and stores.</li>
+        </ul>
+
+        <h3>Context Diagram (Level 0)</h3>
+        <p><strong>External Entities:</strong></p>
+        <ul>
+            <li>Child (Primary User)</li>
+            <li>Parent / Guardian (Installer / occasional supervisor)</li>
+            <li>Content Preprocessing Team (external to runtime; provides processed JSON/audio)</li>
+            <li>Android OS (provides on-device TTS/Language packs)</li>
+        </ul>
+        <p><strong>System:</strong> Hima (Mobile App)</p>
+        <p><strong>High-level flows:</strong></p>
+        <ul>
+            <li>Child -> Hima: interactions (taps, selections)</li>
+            <li>Hima -> Child: UI, audio playback, visuals, activity prompts</li>
+            <li>Parent -> Hima: installs app, optionally configures language/profile</li>
+            <li>Content Team -> Hima (build-time): JSON, audio, emoji assets (bundled)</li>
+            <li>Android OS <-> Hima: optional on-device TTS calls (offline)</li>
+        </ul>
+
+        <div class="diagram">
+            <h4>Context Diagram Visualization</h4>
+            <div class="simple-diagram">
+                <div class="external box">Child (User)</div>
+                <div class="arrow">↓ Selects language/grade/story</div>
+                <div class="process box">Hima App</div>
+                <div class="arrow">↗ Plays audio, shows UI</div>
+                <div class="flex-row">
+                    <div class="external box">Parent/Guardian</div>
+                    <div class="arrow">→ Installs/Sets profile</div>
+                </div>
+                <div class="flex-row">
+                    <div class="external box">Content Team</div>
+                    <div class="arrow">→ Bundles JSON & audio</div>
+                </div>
+                <div class="flex-row">
+                    <div class="process box">Android OS</div>
+                    <div class="arrow">← Uses offline TTS packs</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Level 0 DFD (Major Processes)</h3>
+        <p><strong>Processes:</strong></p>
+        <ol>
+            <li>Onboarding & Selection</li>
+            <li>Alphabet & Combined Sounds Module</li>
+            <li>Story Library & Reader</li>
+            <li>Post-Story Activities & Assessments</li>
+            <li>Asset Loader & Audio Engine</li>
+            <li>Local Progress Store</li>
+        </ol>
+        <p><strong>Data Stores:</strong></p>
+        <ul>
+            <li>D1: Static Content Assets (JSON, audio files, emoji/artwork) — packaged in assets/ or app bundle</li>
+            <li>D2: User Progress (local DB or SharedPreferences) — stores stars, completed stories, last position</li>
+        </ul>
+        <p><strong>Primary flows (examples):</strong></p>
+        <ul>
+            <li>Child -> P1 (language choice)</li>
+            <li>P1 -> D2 (save selected language/profile)</li>
+            <li>P1 -> P3 (grade & chapter selection)</li>
+            <li>P3 -> P5 (request page assets & narration audio)</li>
+            <li>P5 -> D1 (load JSON and audio)</li>
+            <li>P5 -> P3 (deliver page data)</li>
+            <li>P3 -> Child (render page, play audio)</li>
+            <li>P3 -> P4 (on story completion -> trigger activities)</li>
+            <li>P4 -> D2 (save stars / completion)</li>
+        </ul>
+
+        <div class="diagram">
+            <h4>Level 0 DFD Visualization</h4>
+            <div class="ascii-diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                        EXTERNAL                             │
+├─────────────────────────────────────────────────────────────┤
+│  Child/User                    Parent                       │
+│  Content Team - build-time     Android OS - TTS             │
+└─────────────────┬─────────────────┬─────────────────────────┘
+                  │                 │
+                  ▼                 ▼
+┌─────────────────────────────────────────────────────────────┐
+│                         HIMA SYSTEM                         │
+├─────────────────────────────────────────────────────────────┤
+│  1. Onboarding & Selection                                 │
+│  2. Alphabet & Combined Sounds                             │
+│  3. Story Library & Reader                                 │
+│  4. Post-Story Activities                                  │
+│  5. Asset Loader & Audio Engine                            │
+│                                                             │
+│  [D2: User Progress]     [D1: Static Content Assets]       │
+└─────────────────────────────────────────────────────────────┘
+            </div>
+            <p><strong>Data Flow Legend:</strong></p>
+            <ul>
+                <li>Child → P1 (language choice)</li>
+                <li>P1 → D2 (save profile)</li>
+                <li>P1 → P3 (grade & chapter selection)</li>
+                <li>P3 → P5 (request assets)</li>
+                <li>P5 → D1 (load assets)</li>
+                <li>P5 → P3 (deliver data)</li>
+                <li>P3 → Child (render & play)</li>
+                <li>P3 → P4 (completion)</li>
+                <li>P4 → D2 (save progress)</li>
+                <li>Content Team → D1 (build-time)</li>
+                <li>Parent → P1 (install/config)</li>
+            </ul>
+        </div>
+
+        <h3>Level 1: Key Process Details</h3>
+        <ol>
+            <li><strong>Onboarding & Selection</strong>
+                <ul>
+                    <li>Inputs: first-launch flag, user taps, parent-config.</li>
+                    <li>Outputs: selected language, selected profile, main-menu route.</li>
+                    <li>Data stores touched: D2 (persist language/profile).</li>
+                </ul>
+            </li>
+            <li><strong>Alphabet & Combined Sounds Module</strong>
+                <ul>
+                    <li>Inputs: selected language, request for letter or consonant+vowel pair.</li>
+                    <li>Operations: present Vowels/Consonants tabs, show letter glyph, play pre-generated audio, show stroke animation/tracing canvas, display 2-3 emoji examples, handle practice drills cycling vowels.</li>
+                    <li>Outputs: practice completion, earned stars.</li>
+                    <li>Data stores touched: D1 (assets), D2 (progress updates).</li>
+                </ul>
+            </li>
+            <li><strong>Story Library & Reader</strong>
+                <ul>
+                    <li>Inputs: selected grade & chapter, story selection.</li>
+                    <li>Operations: list story tiles (emoji cover), load story JSON, render page-by-page, highlight vocabulary, show vocab pop-up with emoji + meaning + listen button, play page narration or per-word audio.</li>
+                    <li>Outputs: navigation events, story-completion event.</li>
+                    <li>Data stores touched: D1, D2.</li>
+                </ul>
+            </li>
+            <li><strong>Post-Story Activities & Assessments</strong>
+                <ul>
+                    <li>Inputs: story-completion event.</li>
+                    <li>Operations: show vocabulary list, comprehension Q&A (Show Answer), reading practice (audio prompt; no speech recognition required), writing practice (Show Me reveal), compute stars.</li>
+                    <li>Outputs: updated user progress, stars award.</li>
+                    <li>Data stores touched: D2.</li>
+                </ul>
+            </li>
+            <li><strong>Asset Loader & Audio Engine</strong>
+                <ul>
+                    <li>Inputs: asset requests (JSON, audio file paths), TTS fallback triggers.</li>
+                    <li>Operations: load and cache JSON and audio from packaged assets, play audio via Android Media APIs, fall back to on-device TTS for missing audio; ensure offline operations.</li>
+                    <li>Outputs: audio streams, parsed page objects.</li>
+                    <li>Data stores touched: D1 (read-only).</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>Data Stores (Detailed)</h3>
+        <ul>
+            <li><strong>D1: Static Content Assets</strong>
+                <ul>
+                    <li>Contents: letter entries, combined-sound entries, story JSON, vocabulary lists, emoji art, audio files (mp3/ogg), stroke animations (Lottie or sprite JSON).</li>
+                    <li>Location: packaged assets/ or served via Play Asset Delivery / OBB for large datasets.</li>
+                </ul>
+            </li>
+            <li><strong>D2: User Progress</strong>
+                <ul>
+                    <li>Contents: user profile(s), selected language, completed stories (ids), stars earned, last-read page indices, timestamps.</li>
+                    <li>Implementation: Room DB or SharedPreferences for simple fields.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Key Data Contracts (examples)</h3>
+        <h4>Letter JSON (example):</h4>
+        <pre><code>{
+  "id": "h_letter_01",
+  "language": "hindi",
+  "char": "अ",
+  "audio": "audio/letters/h/अ.mp3",
+  "stroke_anim": "animations/letters/h/अ.json",
+  "examples": [
+    {"word":"अदरक","emoji":"🫚","audio":"audio/words/adarak.mp3"}
+  ]
+}</code></pre>
+
+        <h4>Combined sound JSON (example):</h4>
+        <pre><code>{
+  "id": "ka_aa",
+  "base": "क",
+  "vowel": "ा",
+  "combined": "का",
+  "audio": "audio/combined/का.mp3",
+  "stroke_anim": "animations/combined/का.json"
+}</code></pre>
+
+        <h4>Story page JSON (example):</h4>
+        <pre><code>{
+  "storyId": "std1_story3",
+  "pageNo": 1,
+  "text": "कहानी का पहला पृष्ठ",
+  "emoji": "📘",
+  "narration": "audio/stories/std1/story3/page1.mp3",
+  "vocab": [
+    {"word":"प्रभात","meaning":"morning","emoji":"🌅","audio":"audio/vocab/प्रभात.mp3"}
+  ]
+}</code></pre>
+
+        <h3>Offline & Fallback Rules</h3>
+        <ul>
+            <li>The app must not make runtime external network calls for AI or audio.</li>
+            <li>All audio must be bundled; if a required audio file is missing or corrupted, the Asset Loader shall attempt to use Android on-device TTS language packs as a fallback for offline synthesis.</li>
+            <li>If both bundled audio and on-device TTS are unavailable for a language, the app must show a visual cue and skip playback gracefully.</li>
+        </ul>
+
+        <h3>Privacy & Security Notes</h3>
+        <ul>
+            <li>All user progress is stored locally; no telemetry or remote sync is performed by default.</li>
+            <li>If future analytics or sync is added, it must be opt-in and documented separately with privacy controls.</li>
+        </ul>
+
+        <h3>Next steps before development</h3>
+        <ol>
+            <li>Review and confirm the processes and data stores in this DFD.</li>
+            <li>Produce JSON Schema (letters, combined sounds, story pages) and a validator tool to validate pre-processed content before packaging.</li>
+            <li>Create a small sample asset bundle (one letter, one combined sound, one story page) and run a quick prototype to exercise the Asset Loader and Audio Engine.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Hima — UML Diagrams</h2>
+        <h3>Purpose</h3>
+        <p>This document provides high-level UML diagrams for Hima (short for Hindi Marathi). It captures the main classes, components, and a key sequence flow to guide implementation and ensure alignment with the SRS.</p>
+        <p>All diagrams are illustrative — refine them during design/implementation.</p>
+
+        <h3>Class Diagram</h3>
+        <p>Below is a class diagram describing core domain classes and relationships.</p>
+        <div class="diagram">
+            <h4>Class Diagram Visualization</h4>
+            <div class="ascii-diagram">
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  AppController  │    │  UserProfile    │    │  AssetLoader    │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ -currentUser    │    │ -id: String     │    │ -assetsPath     │
+│ -assetManager   │    │ -language       │    │                 │
+│ +start()        │    │ -stars: Map     │    │ +loadLetter()   │
+└─────────┬───────┘    │ +save()         │    │ +loadStory()    │
+          │            └─────────────────┘    │ +loadAudio()    │
+          ▼                                    └─────────┬───────┘
+┌─────────────────┐    ┌─────────────────┐             │
+│  AudioPlayer    │    │  ProgressStore  │             ▼
+├─────────────────┤    ├─────────────────┤    ┌─────────────────┐
+│ +play()         │    │ -db: local      │    │     Letter      │
+│ +stop()         │    │ +saveProgress() │    ├─────────────────┤
+└─────────────────┘    │ +loadProgress() │    │ -id, char       │
+                       └─────────────────┘    │ -audioPath      │
+                                               │ -examples      │
+                                               └─────────┬───────┘
+                                                         │
+                                               ┌─────────────────┐
+                                               │ CombinedSound   │
+                                               ├─────────────────┤
+                                               │ -id, combined   │
+                                               │ -audioPath      │
+                                               └─────────────────┘
+
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│     Story       │    │     Page        │    │  VocabEntry     │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ -storyId        │    │ -pageNo         │    │ -word           │
+│ -title          │    │ -text           │    │ -meaning        │
+│ -pages          │    │ -narrationPath  │    │ -emoji          │
+└─────────┬───────┘    │ -vocab          │    │ -audioPath      │
+          │            └─────────┬───────┘    └─────────────────┘
+          ▼                     │
+          1 ──────────────────── * (pages)
+                                ▼
+                                1 ──────────────────── * (vocab entries)
+            </div>
+        </div>
+        <p><strong>Notes:</strong></p>
+        <ul>
+            <li><code>AssetLoader</code> reads the static JSON/audio assets (D1 in DFD).</li>
+            <li><code>ProgressStore</code> corresponds to D2 in the DFD (Room or SharedPreferences).</li>
+        </ul>
+
+        <h3>Sequence Diagram — Reading a Story Page</h3>
+        <div class="diagram">
+            <h4>Sequence Diagram Visualization - Reading a Story Page</h4>
+            <div class="ascii-diagram">
+┌─────────┐    ┌─────────────────┐    ┌──────────────┐    ┌─────────────┐    ┌────────────────┐
+│  Child  │    │  AppController  │    │ AssetLoader  │    │ AudioPlayer │    │ ProgressStore  │
+└────┬────┘    └─────────┬───────┘    └──────┬───────┘    └─────┬───────┘    └────────┬───────┘
+     │                   │                   │                   │                   │
+     │ selectGradeChapter│                   │                   │                   │
+     │ ─────────────────►│                   │                   │                   │
+     │                   │ loadStory(storyId)│                   │                   │
+     │                   │ ─────────────────►│                   │                   │
+     │                   │                   │ Story             │                   │
+     │                   │ ◄─────────────────│                   │                   │
+     │                   │ renderPage(1)     │                   │                   │
+     │                   │ ─────────────────►│                   │                   │
+     │ tapListenPage     │                   │                   │                   │
+     │ ─────────────────►│                   │                   │                   │
+     │                   │ play(narration)   │                   │                   │
+     │                   │ ─────────────────►│                   │                   │
+     │                   │                   │                   │ audioStream       │
+     │ ◄───────────────────────────────────────────────────────────│                   │
+     │ tapVocab(word)    │                   │                   │                   │
+     │ ─────────────────►│                   │                   │                   │
+     │                   │ loadVocabAudio    │                   │                   │
+     │                   │ ─────────────────►│                   │                   │
+     │                   │                   │ audioPath         │                   │
+     │                   │ ◄─────────────────│                   │                   │
+     │                   │ play(audioPath)   │                   │                   │
+     │                   │ ─────────────────►│                   │                   │
+     │                   │ saveLastPage      │                   │                   │
+     │                   │ ───────────────────────────────────────────────────────────►│
+     │                   │                   │                   │                   │ OK
+     │                   │ ◄────────────────────────────────────────────────────────────│
+            </div>
+        </div>
+
+        <h3>Component Diagram</h3>
+        <div class="diagram">
+            <h4>Component Diagram Visualization</h4>
+            <div class="simple-diagram">
+                <div class="box">UI Layer (Activities/Fragments)</div>
+                <div class="arrow">↓</div>
+                <div class="process box">AppController</div>
+                <div class="flex-row-center">
+                    <div class="arrow">↓</div>
+                    <div class="arrow">↓</div>
+                    <div class="arrow">↓</div>
+                </div>
+                <div class="flex-row">
+                    <div class="process box">Asset Loader</div>
+                    <div class="process box">Audio Player</div>
+                    <div class="process box">Progress Store</div>
+                </div>
+                <div class="flex-row-center">
+                    <div class="arrow">↓</div>
+                    <div class="arrow">↓</div>
+                </div>
+                <div class="flex-row">
+                    <div class="store box">Assets Folder<br/>(JSON, audio, emoji)</div>
+                    <div class="external box">Android Media APIs</div>
+                </div>
+                <div class="flex-row-center">
+                    <div class="arrow">↓</div>
+                </div>
+                <div class="external box">Android on-device TTS (fallback)</div>
+            </div>
+        </div>
+
+        <h3>Notes on mapping to SRS</h3>
+        <ul>
+            <li>Onboarding & Selection (FR-1) is handled by <code>AppController</code> + <code>UserProfile</code>.</li>
+            <li>Alphabet & Combined Sounds (FR-2, FR-5) map to <code>Letter</code> and <code>CombinedSound</code> classes and flows through <code>AssetLoader</code> and <code>AudioPlayer</code>.</li>
+            <li>Story Reader and Post-Story Activities (FR-3, FR-4) map to <code>Story</code>, <code>Page</code>, <code>VocabEntry</code>, and <code>ProgressStore</code>.</li>
+            <li>Offline audio and fallback rules are handled by <code>AssetLoader</code> and <code>AudioPlayer</code> (use bundled audio; <code>AndroidTTS</code> as fallback).</li>
+        </ul>
+
+        <h3>Next steps</h3>
+        <ol>
+            <li>Review diagrams and propose changes to class responsibilities (lightweight iteration).</li>
+            <li>Generate initial TypeScript/Kotlin data classes from the data contracts; create JSON Schema and validator (recommended next task).</li>
+        </ol>
+    </div>
+</body>
+</html>

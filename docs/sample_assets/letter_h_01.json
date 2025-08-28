@@ -1,0 +1,11 @@
+{
+  "id": "h_letter_01",
+  "language": "hindi",
+  "char": "अ",
+  "audio": "audio/letters/h/अ.mp3",
+  "stroke_anim": "animations/letters/h/अ.json",
+  "examples": [
+    {"word": "अदरक", "emoji": "🫚", "audio": "audio/words/adarak.mp3"},
+    {"word": "अम", "emoji": "🍑", "audio": "audio/words/आम.mp3"}
+  ]
+}
