@@ -4,8 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
+// icon imports not required here
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,79 +19,35 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun OnboardingScreen(onLanguageSelected: (String) -> Unit, onBackHome: () -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(
-            Brush.verticalGradient(listOf(Color(0xFFe6f7ff), Color(0xFFFFFFFF)))
-        )
-        .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Hima — Learn & Play",
-            fontSize = 32.sp,
-            fontWeight = FontWeight.ExtraBold,
-            color = Color(0xFF0077cc)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            GradientCard(text = "Hindi 🇮🇳", colorStart = Color(0xFFff8a65), colorEnd = Color(0xFFff7043)) {
-                onLanguageSelected("hindi")
-            }
-            GradientCard(text = "Marathi 🇮🇳", colorStart = Color(0xFF4dd0e1), colorEnd = Color(0xFF00bfa5)) {
-                onLanguageSelected("marathi")
-            }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        TextButton(onClick = onBackHome) {
-            Text("← Change Language", color = Color(0xFF0077cc))
-        }
-    }
-}
-
-@Composable
-fun GradientCard(text: String, colorStart: Color, colorEnd: Color, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier.size(width = 160.dp, height = 160.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-        onClick = onClick
-    ) {
-        Box(
-            modifier = Modifier
-                .background(Brush.verticalGradient(listOf(colorStart, colorEnd)))
-                .fillMaxSize(), contentAlignment = Alignment.Center
+    HimaScaffold(title = "Choose language", showBack = true, onBack = onBackHome) { _ ->
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                // small playful icon above the label
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = null,
-                    tint = Color(0xFFFFF176),
-                    modifier = Modifier.size(28.dp)
-                )
+            Text(
+                text = "Hima — Learn & Play",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = HimaPrimary
+            )
 
-                Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-                Text(
-                    text = text,
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(8.dp),
-                    style = TextStyle(
-                        shadow = Shadow(
-                            color = Color.Black.copy(alpha = 0.25f),
-                            blurRadius = 4f
-                        )
-                    )
-                )
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                GradientCard(title = "Hindi 🇮🇳", subtitle = null, colorStart = Color(0xFFff8a65), colorEnd = Color(0xFFff7043), width = 160.dp, height = 160.dp) {
+                    onLanguageSelected("hindi")
+                }
+                GradientCard(title = "Marathi 🇮🇳", subtitle = null, colorStart = Color(0xFF4dd0e1), colorEnd = Color(0xFF00bfa5), width = 160.dp, height = 160.dp) {
+                    onLanguageSelected("marathi")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            TextButton(onClick = onBackHome) {
+                Text("← Change Language", color = HimaPrimary)
             }
         }
     }
