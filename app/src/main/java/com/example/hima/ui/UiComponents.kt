@@ -31,7 +31,7 @@ fun GradientCard(
     subtitle: String? = null,
     colorStart: Color,
     colorEnd: Color,
-    icon: ImageVector? = Icons.Default.Star,
+    icon: ImageVector? = null,
     width: Dp = 160.dp,
     height: Dp = 160.dp,
     textColor: Color? = null,

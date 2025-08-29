@@ -17,8 +17,11 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,7 +105,20 @@ fun LetterPracticeScreen(
     progressStore: ProgressStore,
     settingsStore: com.example.hima.data.SettingsStore
 ) {
-    HimaScaffold(title = "Practice: $letter", showBack = true, onBack = onBack) { _ ->
+    // Put action buttons into the top app bar by using the Scaffold's navigation area (HimaScaffold still shows back)
+    // control visibility state for combinations/exercise at composable scope (moved so actions lambda can access)
+    var showCombinations by remember { mutableStateOf(false) }
+    var showExercise by remember { mutableStateOf(false) }
+
+    HimaScaffold(title = "Practice: $letter", showBack = true, onBack = onBack, actions = {
+        // Top-right action buttons: minimized icons/text for compact layout
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            TextButton(onClick = { onListen(letter) }) { Text("🔊", color = Color.White) }
+            TextButton(onClick = { showCombinations = !showCombinations }) { Text("Comb", color = Color.White) }
+            TextButton(onClick = { showExercise = true }) { Text("Ex", color = Color.White) }
+            TextButton(onClick = onBack) { Text("Home", color = Color.White) }
+        }
+    }) { _ ->
         var tracing by remember { mutableStateOf(false) }
         var completed by remember { mutableStateOf(false) }
 
@@ -133,45 +149,75 @@ fun LetterPracticeScreen(
     // Two-column layout: left = letter + tracing, right = examples list
     Row(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         // Left column
-    Column(modifier = Modifier.weight(0.62f).fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
+    Column(modifier = Modifier.weight(0.60f).fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = letter, fontSize = 120.sp, color = HimaPrimary)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "⭐️ ${stars.value}", color = HimaPrimary)
+            Text(text = "Stars: ${stars.value}", color = HimaPrimary)
 
-            Spacer(modifier = Modifier.height(12.dp))
-            // control row: Listen | Practice | Combination | Exercise
-            var showCombinations by remember { mutableStateOf(false) }
-            var showExercise by remember { mutableStateOf(false) }
+            Spacer(modifier = Modifier.height(8.dp))
+            // Buttons are moved to the top app bar actions for a cleaner layout. Keep a small inline listen toggle for quick access.
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 PrimaryButton(text = "Listen") { onListen(letter) }
                 PrimaryButton(text = if (!tracing) "Practice" else "Tracing") { tracing = !tracing; if (!tracing) completed = false }
-                PrimaryButton(text = "Combination") { showCombinations = !showCombinations }
-                PrimaryButton(text = "Exercise") { showExercise = true }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
             // show combinations inline when requested
             if (showCombinations) {
+                // define vowel diacritics to construct combined forms
+                val vowelDiacritics = mapOf(
+                    "अ" to "",
+                    "आ" to "ा",
+                    "इ" to "ि",
+                    "ई" to "ी",
+                    "उ" to "ु",
+                    "ऊ" to "ू",
+                    "ए" to "े",
+                    "ऐ" to "ै",
+                    "ओ" to "ो",
+                    "औ" to "ौ"
+                )
+                val vowels = listOf("अ","आ","इ","ई","उ","ऊ","ए","ऐ","ओ","औ")
+                val consonants = listOf("क","ख","ग","घ","ङ","च","छ","ज","झ","ञ","ट","ठ","ड","ढ","ण","त","थ","द","ध","न","प","फ","ब","भ","म","य","र","ल","व","श","ष","स","ह")
+
                 val combos = mutableListOf<String>()
-                // try to read combos from the JSON if present
                 try {
+                    // if JSON provides specific combinations, prefer those
                     val arr = examplesJson?.optJSONArray("combinations")
                     if (arr != null) {
                         for (i in 0 until arr.length()) combos.add(arr.getString(i))
                     }
                 } catch (_: Exception) {}
+
                 if (combos.isEmpty()) {
-                    combos.add("${letter}ा")
-                    combos.add("${letter}ि")
-                    combos.add("${letter}ु")
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    for (c in combos) {
-                        GradientCard(title = c, subtitle = null, colorStart = Color(0xFFffd54f), colorEnd = Color(0xFFffb300), width = 100.dp, height = 60.dp) {
-                            // when user taps a combination, show its practice screen (reuse onLetterSelected by calling onListen with the string)
-                            onListen("tts:${c}")
+                    // build full set depending on whether selected letter is vowel or consonant
+                    if (vowels.contains(letter)) {
+                        // vowel selected: show consonant + vowel diacritic for all consonants
+                        val diac = vowelDiacritics[letter] ?: ""
+                        for (c in consonants) combos.add(c + diac)
+                    } else {
+                        // consonant selected: show consonant combined with every vowel (including base consonant for अ)
+                        for (v in vowels) {
+                            val diac = vowelDiacritics[v] ?: ""
+                            combos.add(letter + diac)
                         }
+                    }
+                }
+
+                // layout combos in rows; reduce size for many combos
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    // show combos in a simple wrapping layout using rows of fixed count
+                    val perRow = 4
+                    combos.chunked(perRow).forEach { rowItems ->
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            for (c in rowItems) {
+                                GradientCard(title = c, subtitle = null, colorStart = Color(0xFFffd54f), colorEnd = Color(0xFFffb300), width = 72.dp, height = 56.dp) {
+                                    onListen("tts:${c}")
+                                }
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(6.dp))
                     }
                 }
                 Spacer(modifier = Modifier.height(12.dp))
@@ -233,7 +279,7 @@ fun LetterPracticeScreen(
             Column(modifier = Modifier.fillMaxSize().padding(12.dp)) {
                 Text(text = "Words that start with $letter", fontSize = 18.sp, color = HimaPrimary)
                 Spacer(modifier = Modifier.height(8.dp))
-                Divider()
+                HorizontalDivider()
                 Spacer(modifier = Modifier.height(8.dp))
 
                 val listState = rememberLazyListState()
@@ -247,34 +293,35 @@ fun LetterPracticeScreen(
                         val lang = settingsStore.getLanguage()
                         val sentence = if (lang == "marathi") ex.optString("sentence_mr", ex.optString("sentence", "")) else ex.optString("sentence", "")
 
-                        Card(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 6.dp), shape = RoundedCornerShape(8.dp)) {
-                            Row(modifier = Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(text = emoji, fontSize = 20.sp)
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                        Text(text = word, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = HimaPrimary)
-                                    }
-                                    if (meaning.isNotEmpty()) Text(text = meaning, fontSize = 13.sp, color = Color(0xFF0B8457))
-                                    if (sentence.isNotEmpty()) Text(text = sentence, fontSize = 13.sp, color = Color.Gray)
-                                }
+                                Card(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(72.dp)
+                                    .padding(vertical = 4.dp), shape = RoundedCornerShape(8.dp)) {
+                                    Row(modifier = Modifier.fillMaxSize().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        Column(modifier = Modifier.weight(1f)) {
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Text(text = emoji, fontSize = 16.sp)
+                                                Spacer(modifier = Modifier.width(8.dp))
+                                                Text(text = word, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = HimaPrimary)
+                                            }
+                                            if (meaning.isNotEmpty()) Text(text = meaning, fontSize = 12.sp, color = Color(0xFF0B8457))
+                                            if (sentence.isNotEmpty()) Text(text = sentence, fontSize = 12.sp, color = Color.Gray, maxLines = 1)
+                                        }
 
-                                Spacer(modifier = Modifier.width(8.dp))
-                                // listen button: request either asset playback or TTS of word+meaning+sentence
-                                Button(onClick = {
-                                    val parts = listOf(word, meaning, sentence).filter { it.isNotBlank() }
-                                    val text = parts.joinToString(separator = ". ")
-                                    if (audio.isNotEmpty()) {
-                                        // include a readable fallback text so TTS can speak something sensible if asset play fails
-                                        onListen("asset:${audio}|fallback:${text}")
-                                    } else {
-                                        onListen("tts:${text}")
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        // listen button: request either asset playback or TTS of word+meaning+sentence
+                                        Button(onClick = {
+                                            val parts = listOf(word, meaning, sentence).filter { it.isNotBlank() }
+                                            val text = parts.joinToString(separator = ". ")
+                                            if (audio.isNotEmpty()) {
+                                                // include a readable fallback text so TTS can speak something sensible if asset play fails
+                                                onListen("asset:${audio}|fallback:${text}")
+                                            } else {
+                                                onListen("tts:${text}")
+                                            }
+                                        }, shape = RoundedCornerShape(50), content = { Text("🔊") }, colors = ButtonDefaults.buttonColors(containerColor = HimaPrimary.copy(alpha = 0.08f)))
                                     }
-                                }, shape = RoundedCornerShape(50), content = { Text("🔊") })
-                            }
-                        }
+                                }
                     }
                 }
 
@@ -291,52 +338,121 @@ fun LetterPracticeScreen(
     // Identify Word exercise dialog
     if (showExercise) {
         // Build candidates: pick one target from displayedExamples and up to 3 distractors from examples
-        val target = displayedExamples.firstOrNull() ?: examples.firstOrNull()
-        if (target != null) {
-            val candidates = remember { mutableStateListOf<org.json.JSONObject>() }
-            LaunchedEffect(target) {
-                candidates.clear()
-                candidates.add(target)
-                // add distractors
-                val others = (examples - target).shuffled().take(3)
-                candidates.addAll(others)
-                candidates.shuffle()
-                // play the target audio automatically
-                val audio = target.optString("audio", "")
-                val parts = listOf(target.optString("word", ""), target.optString("meaning", ""), target.optString("sentence", "")).filter { it.isNotBlank() }
+        // Use mutable state so Try New Word can re-select a target
+        val pool = remember { examples.toMutableList() }
+        var targetIndex by remember { mutableStateOf(0) }
+        var target by remember { mutableStateOf<org.json.JSONObject?>(null) }
+        val candidates = remember { mutableStateListOf<org.json.JSONObject>() }
+
+        fun pickTargetAndCandidates() {
+            if (pool.isEmpty()) return
+            // pick a random target from displayedExamples if available, else from pool
+            val t = if (displayedExamples.isNotEmpty()) displayedExamples.random() else pool.random()
+            target = t
+            candidates.clear()
+            candidates.add(t)
+            val others = (pool.filter { it != t }).shuffled().take(3)
+            candidates.addAll(others)
+            candidates.shuffle()
+        }
+
+        LaunchedEffect(showExercise) {
+            pickTargetAndCandidates()
+            // play the target audio automatically
+            target?.let { tgt ->
+                val audio = tgt.optString("audio", "")
+                val parts = listOf(tgt.optString("word", ""), tgt.optString("meaning", ""), tgt.optString("sentence", "")).filter { it.isNotBlank() }
                 val text = parts.joinToString(". ")
                 if (audio.isNotEmpty()) onListen("asset:${audio}|fallback:${text}") else onListen("tts:${text}")
             }
+        }
 
-            var selectedIndex by remember { mutableStateOf(-1) }
-            AlertDialog(onDismissRequest = { showExercise = false }, title = { Text("Identify the word") }, text = {
-                Column {
-                    Text("Listen to the word and choose the correct option:")
-                    Spacer(modifier = Modifier.height(12.dp))
-                    for ((i, c) in candidates.withIndex()) {
-                        val w = c.optString("word", "")
-                        Button(onClick = { selectedIndex = i }) { Text(w) }
-                        Spacer(modifier = Modifier.height(6.dp))
+        var selectedIndex by remember { mutableStateOf(-1) }
+
+        AlertDialog(onDismissRequest = { showExercise = false }, title = { Text("Identify the word") }, text = {
+            Column {
+                Text("Listen to the word and choose the correct option:")
+                Spacer(modifier = Modifier.height(12.dp))
+                for ((i, c) in candidates.withIndex()) {
+                    val w = c.optString("word", "")
+                    // highlight selected candidate
+                    val isSelected = (i == selectedIndex)
+                    val bg = if (isSelected) HimaPrimary.copy(alpha = 0.12f) else Color.Transparent
+                    Button(onClick = { selectedIndex = i }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), colors = ButtonDefaults.buttonColors(containerColor = bg)) {
+                        Text(w, color = HimaPrimary)
                     }
                 }
-            }, confirmButton = {
-                Button(onClick = {
-                    if (selectedIndex >= 0) {
-                        val chosen = candidates[selectedIndex]
-                        if (chosen == target) {
-                            progressStore.addStar(letter)
-                            Toast.makeText(ctx, "Correct! Star awarded.", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(ctx, "Try again.", Toast.LENGTH_SHORT).show()
+            }
+        }, confirmButton = {
+            Column {
+                Row {
+                    Button(onClick = {
+                        if (selectedIndex >= 0) {
+                            val chosen = candidates[selectedIndex]
+                                if (chosen == target) {
+                                // award star and praise
+                                progressStore.addStar(letter)
+                                Toast.makeText(ctx, "Correct! Star awarded.", Toast.LENGTH_SHORT).show()
+                                // localized appreciation pool
+                                val lang = settingsStore.getLanguage()
+                                // praise pools: Pair(Devanagari, transliteration)
+                                val praisePool = if (lang == "marathi") listOf(
+                                    Pair("छान!", "Chaan!"),
+                                    Pair("खूप छान!", "Khoop chaan!"),
+                                    Pair("शाबाश!", "Shabash!"),
+                                    Pair("अतिशय छान!", "Atishay chaan!"),
+                                    Pair("खूप छान प्रयत्न!", "Khoop chaan prayatn!"),
+                                    Pair("उत्तम!", "Uttam!"),
+                                    Pair("अभिनंदन!", "Abhinandan!"),
+                                    Pair("अगदी बरोबर!", "Agadi barobar!")
+                                ) else {
+                                    // Hindi praise pool with intensity variants and optional mascot audio triggers
+                                    val base = listOf(
+                                        Pair("बहुत बढ़िया!", "Bahut badhiya!"),
+                                        Pair("शाबाश!", "Shabash!"),
+                                        Pair("अच्छा किया!", "Accha kiya!"),
+                                        Pair("बहुत अच्छा!", "Bahut accha!")
+                                    )
+                                    // intensity variants: gentle, normal, excited
+                                    val intense = base.map { Pair(it.first + " 🎉", it.second + " (great)") }
+                                    val gentle = base.map { Pair(it.first.replace("!", "."), it.second.replace("!", ".")) }
+                                    val all = gentle + base + intense
+                                    val pick = all.random()
+                                    val praise = pick
+                                    // optional mascot audio placeholder: call onListen with a mascot asset id (developer can replace with real file)
+                                    val mascotAudio = listOf("asset:audio/mascot/cheer1.mp3", "asset:audio/mascot/clap1.mp3")
+                                    val useMascot = (0..1).random() == 0
+                                    if (useMascot) {
+                                        // try to play mascot audio first (NavGraph will fall back to TTS if asset not present)
+                                        onListen(mascotAudio.random())
+                                    }
+                                    onListen("tts:${praise.first}")
+                                    Toast.makeText(ctx, praise.second, Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(ctx, "Try again.", Toast.LENGTH_SHORT).show()
+                                val lang = settingsStore.getLanguage()
+                                val tryAgain = if (lang == "marathi") "पुन्हा प्रयत्न करा" else "फिर कोशिश करो"
+                                onListen("tts:${tryAgain}")
+                            }
+                            showExercise = false
                         }
-                        showExercise = false
-                    }
-                }) { Text("Submit") }
-            }, dismissButton = { Button(onClick = { showExercise = false }) { Text("Cancel") } })
-        } else {
-            // nothing to exercise on
-            LaunchedEffect(Unit) { Toast.makeText(ctx, "Not enough words to run exercise", Toast.LENGTH_SHORT).show(); showExercise = false }
-        }
+                    }) { Text("Submit") }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Button(onClick = {
+                        // Try a new word: pick new target and replay
+                        pickTargetAndCandidates()
+                        selectedIndex = -1
+                        target?.let { tgt ->
+                            val audio = tgt.optString("audio", "")
+                            val parts = listOf(tgt.optString("word", ""), tgt.optString("meaning", ""), tgt.optString("sentence", "")).filter { it.isNotBlank() }
+                            val text = parts.joinToString(". ")
+                            if (audio.isNotEmpty()) onListen("asset:${audio}|fallback:${text}") else onListen("tts:${text}")
+                        }
+                    }) { Text("Try New Word") }
+                }
+            }
+        }, dismissButton = { Button(onClick = { showExercise = false }) { Text("Cancel") } })
     }
     }
 }

@@ -11,6 +11,8 @@ import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -28,18 +30,21 @@ fun HimaScaffold(
     title: String,
     showBack: Boolean = false,
     onBack: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
     content: @Composable (innerPadding: PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = title, color = Color.White) },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = HimaPrimary),
+            // Use a top app bar with a left-aligned title so screens can place actions on the right
+            TopAppBar(
+                title = { Row(verticalAlignment = Alignment.CenterVertically) { Text(text = title, color = Color.White) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = HimaPrimary),
                 navigationIcon = {
                     if (showBack && onBack != null) {
                         IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White) }
                     }
                 }
+                , actions = actions
             )
         },
         containerColor = HimaSoftBg
