@@ -46,4 +46,24 @@ class AssetLoader(private val context: Context) {
     fun getStoryNarrationPath(storyJson: JSONObject): String? {
         return storyJson.optString("narration", null)
     }
+
+    /**
+     * Find a letter JSON in assets by matching its `char` field.
+     * Useful when asset filenames use transliterations but UI shows the native character.
+     */
+    fun findLetterJsonByChar(letterChar: String): JSONObject? {
+        return try {
+            val files = context.assets.list("") ?: return null
+            for (f in files) {
+                if (f.startsWith("letter_") && f.endsWith(".json")) {
+                    val json = loadJsonFromAssets(f)
+                    if (json != null && getLetterChar(json) == letterChar) return json
+                }
+            }
+            null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
 }

@@ -1,0 +1,12 @@
+{
+  "id": "d_letter_01",
+  "language": "hindi",
+  "char": "द",
+  "audio": "audio/letters/d/द.mp3",
+  "stroke_anim": "animations/letters/d/द.json",
+  "examples": [
+    {"word": "दरवाज़ा", "emoji": "🚪", "audio": "audio/words/darwaza.mp3", "meaning": "Door", "sentence": "कृपया दरवाज़ा बंद करो।"},
+    {"word": "दफ्तर", "emoji": "🏢", "audio": "audio/words/daftar.mp3", "meaning": "Office", "sentence": "वह दफ्तर में काम करता है।"},
+    {"word": "दूध", "emoji": "🥛", "audio": "audio/words/doodh.mp3", "meaning": "Milk", "sentence": "मुझे एक गिलास दूध चाहिए।"}
+  ]
+}

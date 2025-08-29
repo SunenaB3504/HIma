@@ -1,0 +1,12 @@
+{
+  "id": "k_letter_01",
+  "language": "hindi",
+  "char": "क",
+  "audio": "audio/letters/k/क.mp3",
+  "stroke_anim": "animations/letters/k/क.json",
+  "examples": [
+    {"word": "कमल", "emoji": "🌸", "audio": "audio/words/kamal.mp3", "meaning": "Lotus", "sentence": "कमल तालाब में खिलता है।"},
+    {"word": "किताब", "emoji": "📚", "audio": "audio/words/kitab.mp3", "meaning": "Book", "sentence": "मैं किताब पढ़ता हूँ।"},
+    {"word": "कबूतर", "emoji": "🕊️", "audio": "audio/words/kabutar.mp3", "meaning": "Pigeon", "sentence": "कबूतर उड़ रहा है।"}
+  ]
+}

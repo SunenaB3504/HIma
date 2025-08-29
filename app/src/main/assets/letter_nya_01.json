@@ -1,0 +1,12 @@
+{
+  "id": "nya_letter_01",
+  "language": "hindi",
+  "char": "ञ",
+  "audio": "audio/letters/nya/ञ.mp3",
+  "stroke_anim": "animations/letters/nya/ञ.json",
+  "examples": [
+    {"word": "ज्ञाना", "emoji": "📘", "audio": "audio/words/jyana.mp3", "meaning": "Knowledge (archaic)", "sentence": "ज्ञान महत्वपूर्ण है।"},
+    {"word": "अन्य", "emoji": "🔄", "audio": "audio/words/anya.mp3", "meaning": "Other", "sentence": "यह विकल्प अन्य है।"},
+    {"word": "ज्ञान", "emoji": "💡", "audio": "audio/words/gyaan.mp3", "meaning": "Knowledge", "sentence": "पढ़ाई से ज्ञान मिलता है।"}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "s_letter_01",
+  "language": "hindi",
+  "char": "स",
+  "audio": "audio/letters/s/स.mp3",
+  "stroke_anim": "animations/letters/s/स.json",
+  "examples": [
+    {"word": "सूरज", "emoji": "☀️", "audio": "audio/words/suraj.mp3", "meaning": "Sun", "sentence": "सूरज सुबह उगता है।"},
+    {"word": "सड़क", "emoji": "🛣️", "audio": "audio/words/sadak.mp3", "meaning": "Road", "sentence": "सड़क पर कारें चलती हैं।"},
+    {"word": "सिंह", "emoji": "🦁", "audio": "audio/words/singh.mp3", "meaning": "Lion", "sentence": "सिंह जंगल का राजा है।"}
+  ]
+}

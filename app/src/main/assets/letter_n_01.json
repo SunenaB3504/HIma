@@ -1,0 +1,12 @@
+{
+  "id": "n_letter_01",
+  "language": "hindi",
+  "char": "न",
+  "audio": "audio/letters/n/न.mp3",
+  "stroke_anim": "animations/letters/n/न.json",
+  "examples": [
+    {"word": "नदी", "emoji": "🏞️", "audio": "audio/words/nadi.mp3", "meaning": "River", "sentence": "नदी किनारे पेड़ हैं।"},
+    {"word": "नमक", "emoji": "🧂", "audio": "audio/words/namak.mp3", "meaning": "Salt", "sentence": "खाने में नमक डालें।"},
+    {"word": "नयी", "emoji": "🆕", "audio": "audio/words/nayi.mp3", "meaning": "New", "sentence": "यह किताब नयी है।"}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "th_letter_01",
+  "language": "hindi",
+  "char": "थ",
+  "audio": "audio/letters/th/थ.mp3",
+  "stroke_anim": "animations/letters/th/थ.json",
+  "examples": [
+    {"word": "थमना", "emoji": "🛑", "audio": "audio/words/thamna.mp3", "meaning": "Stop", "sentence": "गाड़ी को थमना पड़ा।"},
+    {"word": "थाली", "emoji": "🍽️", "audio": "audio/words/thali.mp3", "meaning": "Plate", "sentence": "खाना थाली में रखा गया है।"},
+    {"word": "थोड़ा", "emoji": "➖", "audio": "audio/words/thoda.mp3", "meaning": "A little", "sentence": "मुझे थोड़ा पानी दो।"}
+  ]
+}

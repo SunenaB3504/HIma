@@ -1,0 +1,12 @@
+{
+  "id": "ii_letter_01",
+  "language": "hindi",
+  "char": "ई",
+  "audio": "audio/letters/ii/ई.mp3",
+  "stroke_anim": "animations/letters/ii/ई.json",
+  "examples": [
+    {"word": "ईख", "emoji": "🌾", "audio": "audio/words/eekh.mp3", "meaning": "Sugarcane", "sentence": "गर्मी में लोग ईख काटते हैं।"},
+    {"word": "ईद", "emoji": "🎉", "audio": "audio/words/eid.mp3", "meaning": "Eid (festival)", "sentence": "ईद पर मिठाई बांटी जाती है।"},
+    {"word": "ईमान", "emoji": "🤝", "audio": "audio/words/imaan.mp3", "meaning": "Honesty", "sentence": "ईमान सबसे बड़ा गुण है।"}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "ch_letter_01",
+  "language": "hindi",
+  "char": "च",
+  "audio": "audio/letters/ch/च.mp3",
+  "stroke_anim": "animations/letters/ch/च.json",
+  "examples": [
+    {"word": "चम्मच", "emoji": "🥄", "audio": "audio/words/chammach.mp3", "meaning": "Spoon", "sentence": "सूप के लिए चम्मच चाहिए।"},
+    {"word": "चाकू", "emoji": "🔪", "audio": "audio/words/chaku.mp3", "meaning": "Knife", "sentence": "सब्जी काटने के लिए चाकू लें।"},
+    {"word": "चरखा", "emoji": "🧵", "audio": "audio/words/charkha.mp3", "meaning": "Spinning wheel", "sentence": "पुराने समय में चरखा चलता था।"}
+  ]
+}

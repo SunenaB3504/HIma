@@ -1,0 +1,12 @@
+{
+  "id": "tth_letter_01",
+  "language": "hindi",
+  "char": "ठ",
+  "audio": "audio/letters/tth/ठ.mp3",
+  "stroke_anim": "animations/letters/tth/ठ.json",
+  "examples": [
+    {"word": "ठंड", "emoji": "❄️", "audio": "audio/words/thand.mp3", "meaning": "Cold", "sentence": "सर्दियों में बहुत ठंड होती है।"},
+    {"word": "ठेला", "emoji": "🛒", "audio": "audio/words/thela.mp3", "meaning": "Cart", "sentence": "बाजार में ठेला लगा है।"},
+    {"word": "ठहरना", "emoji": "⏸️", "audio": "audio/words/thaharna.mp3", "meaning": "Stay/Stop", "sentence": "कृपया ठहरिये।"}
+  ]
+}

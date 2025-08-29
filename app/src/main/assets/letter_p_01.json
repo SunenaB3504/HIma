@@ -1,0 +1,12 @@
+{
+  "id": "p_letter_01",
+  "language": "hindi",
+  "char": "प",
+  "audio": "audio/letters/p/प.mp3",
+  "stroke_anim": "animations/letters/p/प.json",
+  "examples": [
+    {"word": "पानी", "emoji": "💧", "audio": "audio/words/pani.mp3", "meaning": "Water", "sentence": "पानी से प्यास बुझती है।"},
+    {"word": "पहाड़", "emoji": "⛰️", "audio": "audio/words/pahad.mp3", "meaning": "Mountain", "sentence": "हम पहाड़ पर चढ़े।"},
+    {"word": "पतंग", "emoji": "🪁", "audio": "audio/words/patang.mp3", "meaning": "Kite", "sentence": "बच्चे पतंग उड़ा रहे हैं।"}
+  ]
+}

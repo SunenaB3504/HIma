@@ -1,0 +1,12 @@
+{
+  "id": "kh_letter_01",
+  "language": "hindi",
+  "char": "ख",
+  "audio": "audio/letters/kh/ख.mp3",
+  "stroke_anim": "animations/letters/kh/ख.json",
+  "examples": [
+    {"word": "खरगोश", "emoji": "🐰", "audio": "audio/words/khargosh.mp3", "meaning": "Rabbit", "sentence": "खरगोश तेज दौड़ता है।"},
+    {"word": "खाना", "emoji": "🍽️", "audio": "audio/words/khana.mp3", "meaning": "Food", "sentence": "मुझे खाना बनाना पसंद है।"},
+    {"word": "खिड़की", "emoji": "🪟", "audio": "audio/words/khidki.mp3", "meaning": "Window", "sentence": "खिड़की से ठंडी हवा आती है।"}
+  ]
+}

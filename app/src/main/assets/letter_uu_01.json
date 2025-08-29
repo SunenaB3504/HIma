@@ -1,0 +1,12 @@
+{
+  "id": "uu_letter_01",
+  "language": "hindi",
+  "char": "ऊ",
+  "audio": "audio/letters/uu/ऊ.mp3",
+  "stroke_anim": "animations/letters/uu/ऊ.json",
+  "examples": [
+    {"word": "ऊँट", "emoji": "🐪", "audio": "audio/words/oont.mp3", "meaning": "Camel", "sentence": "रेगिस्तान में ऊँट चलता है।"},
+    {"word": "ऊर्जा", "emoji": "⚡", "audio": "audio/words/urja.mp3", "meaning": "Energy", "sentence": "व्यायाम से ऊर्जा बढ़ती है।"},
+    {"word": "ऊबना", "emoji": "😞", "audio": "audio/words/oobna.mp3", "meaning": "Get bored", "sentence": "लंबे समय से वह ऊब रहा था।"}
+  ]
+}

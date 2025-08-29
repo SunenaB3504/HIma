@@ -1,0 +1,12 @@
+{
+  "id": "ddh_letter_01",
+  "language": "hindi",
+  "char": "ढ",
+  "audio": "audio/letters/ddh/ढ.mp3",
+  "stroke_anim": "animations/letters/ddh/ढ.json",
+  "examples": [
+    {"word": "ढोल", "emoji": "🥁", "audio": "audio/words/dhol.mp3", "meaning": "Drum", "sentence": "मेले में ढोल बाज रहा है।"},
+    {"word": "ढ़ाई", "emoji": "⚖️", "audio": "audio/words/dhai.mp3", "meaning": "Two and a half", "sentence": "समय ढाई घंटे का है।"},
+    {"word": "ढक्कन", "emoji": "🫙", "audio": "audio/words/dhakkan.mp3", "meaning": "Lid", "sentence": "बर्तन का ढक्कन बंद है।"}
+  ]
+}

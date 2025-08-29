@@ -1,0 +1,12 @@
+{
+  "id": "va_letter_01",
+  "language": "hindi",
+  "char": "व",
+  "audio": "audio/letters/va/व.mp3",
+  "stroke_anim": "animations/letters/va/व.json",
+  "examples": [
+    {"word": "वाटर", "emoji": "🚰", "audio": "audio/words/water.mp3", "meaning": "Water", "sentence": "कृपया पानी पिएं।"},
+    {"word": "वृक्ष", "emoji": "🌳", "audio": "audio/words/vriksh.mp3", "meaning": "Tree", "sentence": "यह बड़ा वृक्ष है।"},
+    {"word": "वर्षा", "emoji": "🌧️", "audio": "audio/words/varsha.mp3", "meaning": "Rain", "sentence": "वर्षा का मौसम आ गया है।"}
+  ]
+}

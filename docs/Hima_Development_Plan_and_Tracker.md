@@ -56,9 +56,15 @@ Phase 2 — Alphabet & Combined Sounds (3 weeks)
   - Implement Letter Practice screen with tracing canvas / Lottie integration.
   - Implement Combined Sound module (select consonant → cycle vowels).
   - Persist simple progress (stars) in Room/SharedPreferences.
+   - Extend letter and vocab JSON schema to include, per example-word: `word` (native), `meaning` (English), `sentence` (Hindi/Marathi), and an optional `audio` path. Update the asset validator and sample assets accordingly.
+   - Implement UI for Letter Detail to display at least three example words per letter (where available), each showing the English meaning and a short example sentence, plus a per-entry "Listen" button that uses bundled audio or offline TTS.
+   - Implement an "Identify Word (listening)" exercise accessible from letter practice and post-story activities. The exercise shall play a target word (audio/TTS) and show 3–4 candidates; provide immediate feedback and persist stars on success.
 - Acceptance criteria:
   - Each letter practice screen plays correct audio, shows tracing, and lists emoji examples.
   - Combined sounds display combined glyphs and play audio.
+ - The letter data schema includes `meaning` and `sentence` fields; sample assets contain at least three words per letter demonstrating the fields.
+ - Letter Detail UI displays ≥3 words with English meaning and example sentence, and per-word Listen button plays correct audio (or TTS fallback).
+ - Identify Word exercise functions: app speaks a target, user selects from candidates, correct selection awards a star and persists progress; exercise works offline.
 
 Phase 3 — Story Library & Reader (4 weeks)
 - MVP: Grade+Chapter selector, story library, story reader (page-by-page), vocab pop-ups, master narration.

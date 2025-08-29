@@ -1,0 +1,12 @@
+{
+  "id": "b_letter_01",
+  "language": "hindi",
+  "char": "ब",
+  "audio": "audio/letters/b/ब.mp3",
+  "stroke_anim": "animations/letters/b/ब.json",
+  "examples": [
+    {"word": "बिल्ली", "emoji": "🐱", "audio": "audio/words/billi.mp3", "meaning": "Cat", "sentence": "बिल्ली म्याऊँ करती है।"},
+    {"word": "बस", "emoji": "🚌", "audio": "audio/words/bus.mp3", "meaning": "Bus", "sentence": "हम बस से स्कूल जाते हैं।"},
+    {"word": "बकरी", "emoji": "🐐", "audio": "audio/words/bakri.mp3", "meaning": "Goat", "sentence": "बकरी दूध देती है।"}
+  ]
+}

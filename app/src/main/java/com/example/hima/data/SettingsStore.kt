@@ -10,4 +10,10 @@ class SettingsStore(context: Context) {
     fun setUseTTS(value: Boolean) {
         prefs.edit().putBoolean("use_tts", value).apply()
     }
+
+    fun getLanguage(): String = prefs.getString("language", "hindi") ?: "hindi"
+
+    fun setLanguage(lang: String) {
+        prefs.edit().putString("language", lang).apply()
+    }
 }

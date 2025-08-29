@@ -1,0 +1,12 @@
+{
+  "id": "u_letter_01",
+  "language": "hindi",
+  "char": "उ",
+  "audio": "audio/letters/u/उ.mp3",
+  "stroke_anim": "animations/letters/u/उ.json",
+  "examples": [
+    {"word": "उल्लू", "emoji": "🦉", "audio": "audio/words/ullu.mp3", "meaning": "Owl", "sentence": "रात में उल्लू आवाज करता है।"},
+    {"word": "उद्यान", "emoji": "🏞️", "audio": "audio/words/udyan.mp3", "meaning": "Garden", "sentence": "हम पार्क में उद्यान में गए।"},
+    {"word": "उल्टा", "emoji": "🔁", "audio": "audio/words/ulta.mp3", "meaning": "Opposite", "sentence": "कागज़ को उल्टा मोड़ो।"}
+  ]
+}

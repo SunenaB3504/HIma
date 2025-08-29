@@ -93,6 +93,15 @@ Secondary users are parents or guardians who will install the app and may occasi
 - An animated guide showing the correct stroke order for writing the letter (a tracing canvas).
 - A section displaying 2-3 simple, pre-defined example words that start with the letter, each with an accompanying emoji illustration and a "Listen" button.
 
+Additional expectations for example words and audio:
+
+- Each letter's example-words section shall show at least three example words that begin with the selected letter where available.
+- For every example word the UI shall display: the word (native script), a short English meaning, and a short example sentence in the chosen instruction language (Hindi or Marathi).
+- Each example-word entry shall include a "Listen" control which plays either a bundled pre-generated audio clip for the word or, if such an asset is not available, shall use the device's offline TTS (Hindi/Marathi) to speak the word and its example sentence.
+- The letter practice screen shall also provide a single "Listen Letter" control to speak the selected letter glyph itself (using bundled audio if present, otherwise TTS in the selected language).
+
+These additions ensure that children see contextual vocabulary (word + meaning + sentence) and can hear natural pronunciation even when only TTS fallback is available.
+
 #### FR-3: Story Reading Module
 
 3.1 (Story Library): After selecting a grade and chapter, the app shall display a vibrant, grid-based library of all available chapters/stories for that grade and language. Each story will be represented by a "book cover" showing the title and an engaging emoji or simple artwork.
@@ -116,6 +125,15 @@ Secondary users are parents or guardians who will install the app and may occasi
 4.4 (Reading Practice - Self-Evaluated): The app will display key sentences from the story. The child will be prompted by an audio cue to "Listen, then read this out loud!". The child can listen to the correct pronunciation as many times as they want. There will be no speech recognition.
 
 4.5 (Writing Practice - Self-Evaluated): The app will prompt the child to write a specific word or sentence from the story in their notebook. After listening to the audio, the child can press a "Show Me" button, which will display the correct text on the screen for them to compare with their written work.
+
+4.6 (Audio Identification Exercise): The app shall provide an optional listening-and-identify exercise where the app speaks a target vocabulary word (using bundled audio or offline TTS) and the child must select the correct word from a short list of candidate words displayed on screen. The exercise shall:
+
+- Play the target word (and optionally a short example sentence) with a single tap to start the round.
+- Present 3 or 4 candidate words (native script) with one correct option and others as distractors.
+- Provide immediate feedback (correct / incorrect). If correct, award a star and play a short positive audio cue; if incorrect, allow at least one retry and show the correct answer after the attempt.
+- Persist exercise scores or awards in the user's progress so that completed activities contribute to star totals.
+
+This exercise is explicitly offline and does not require or rely on speech recognition; it tests listening comprehension and word recognition.
 
 #### FR-5: Learning Combined Sounds (Consonant + Vowel)
 

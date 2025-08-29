@@ -1,0 +1,12 @@
+{
+  "id": "l_letter_01",
+  "language": "hindi",
+  "char": "ल",
+  "audio": "audio/letters/l/ल.mp3",
+  "stroke_anim": "animations/letters/l/ल.json",
+  "examples": [
+    {"word": "लाल", "emoji": "🔴", "audio": "audio/words/laal.mp3", "meaning": "Red", "sentence": "यह सेब लाल है।"},
+    {"word": "लड्डू", "emoji": "🧁", "audio": "audio/words/ladoo.mp3", "meaning": "Ladoo (sweet)", "sentence": "मेरी दादी लड्डू बनाती हैं।"},
+    {"word": "लहर", "emoji": "🌊", "audio": "audio/words/lahar.mp3", "meaning": "Wave", "sentence": "समुद्र की लहरें बड़ी हैं।"}
+  ]
+}

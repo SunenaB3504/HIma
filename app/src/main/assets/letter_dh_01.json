@@ -1,0 +1,12 @@
+{
+  "id": "dh_letter_01",
+  "language": "hindi",
+  "char": "ध",
+  "audio": "audio/letters/dh/ध.mp3",
+  "stroke_anim": "animations/letters/dh/ध.json",
+  "examples": [
+    {"word": "धन", "emoji": "💰", "audio": "audio/words/dhan.mp3", "meaning": "Wealth", "sentence": "मेहनत से धन मिलता है।"},
+    {"word": "धूप", "emoji": "☀️", "audio": "audio/words/dhoop.mp3", "meaning": "Sunshine", "sentence": "धूप में गर्मी है।"},
+    {"word": "ध्यान", "emoji": "🧘", "audio": "audio/words/dhyan.mp3", "meaning": "Attention/Meditation", "sentence": "आप ध्यान से सुनें।"}
+  ]
+}

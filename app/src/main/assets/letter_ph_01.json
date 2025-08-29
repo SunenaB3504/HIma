@@ -1,0 +1,12 @@
+{
+  "id": "ph_letter_01",
+  "language": "hindi",
+  "char": "फ",
+  "audio": "audio/letters/ph/फ.mp3",
+  "stroke_anim": "animations/letters/ph/फ.json",
+  "examples": [
+    {"word": "फल", "emoji": "🍎", "audio": "audio/words/phal.mp3", "meaning": "Fruit", "sentence": "फल खाना सेहतमंद है।"},
+    {"word": "फूल", "emoji": "🌸", "audio": "audio/words/fool.mp3", "meaning": "Flower", "sentence": "बगीचे में सुंदर फूल हैं।"},
+    {"word": "फरिश्ता", "emoji": "👼", "audio": "audio/words/farishta.mp3", "meaning": "Angel", "sentence": "कहानी में फरिश्ता आया।"}
+  ]
+}

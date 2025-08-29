@@ -43,7 +43,9 @@ fun NavGraph(startDestination: String = "home") {
             }
             composable("onboarding") {
                 OnboardingScreen(onLanguageSelected = { lang ->
-                    // persist or pass language; navigate to main menu
+                    // persist selected language
+                    settingsStore.setLanguage(lang)
+                    // navigate to main menu
                     navController.navigate("main") {
                         popUpTo("onboarding") { inclusive = true }
                     }
@@ -59,22 +61,47 @@ fun NavGraph(startDestination: String = "home") {
             }
             composable("letter/{letter}") { backStack ->
                 val letter = backStack.arguments?.getString("letter") ?: "अ"
-                LetterPracticeScreen(letter = letter, onBack = { navController.popBackStack() }, onListen = { l ->
-                    // if user prefers device TTS, speak directly
-                    if (settingsStore.useTTS()) {
-                        ttsManager.speak(l)
-                    } else {
-                        // try known assets first, then fallback to JSON-driven path, then TTS
-                        val candidate = "audio/letters/${l}.mp3"
-                        val played = try { audioPlayer.playAsset(candidate) } catch (e: Exception) { false }
-                        if (!played) {
-                            val json = try { assetLoader.loadJsonFromAssets("letter_${l}.json") } catch (e: Exception) { null }
-                            val path = json?.let { assetLoader.getLetterAudioPath(it) }
-                            val ok = if (path != null) try { audioPlayer.playAsset(path) } catch (e: Exception) { false } else false
-                            if (!ok) ttsManager.speak(l)
+                LetterPracticeScreen(letter = letter, onBack = { navController.popBackStack() }, onListen = { payload ->
+                    // payload format:
+                    //  - "asset:<path>" -> play asset directly
+                    //  - "tts:<text>" -> speak text via TTS
+                    //  - otherwise: legacy handling where payload is a letter or filename
+                    when {
+                        payload.startsWith("asset:") -> {
+                            // support optional fallback text after a pipe: asset:<path>|fallback:<text>
+                            val after = payload.removePrefix("asset:")
+                            val parts = after.split("|fallback:", limit = 2)
+                            val path = parts.getOrNull(0) ?: ""
+                            val fallback = parts.getOrNull(1)
+                            val played = try { audioPlayer.playAsset(path) } catch (e: Exception) { false }
+                            if (!played) {
+                                val lang = settingsStore.getLanguage()
+                                if (!fallback.isNullOrBlank()) ttsManager.speakWithLocale(fallback, if (lang == "marathi") "mr" else "hi") else ttsManager.speakWithLocale(path, null)
+                            }
+                        }
+                        payload.startsWith("tts:") -> {
+                            val text = payload.removePrefix("tts:")
+                            val lang = settingsStore.getLanguage()
+                            ttsManager.speakWithLocale(text, if (lang == "marathi") "mr" else "hi")
+                        }
+                        else -> {
+                            // legacy: if user prefers device TTS, speak directly
+                            if (settingsStore.useTTS()) {
+                                ttsManager.speak(payload)
+                            } else {
+                                // try known assets first, then fallback to JSON-driven path, then TTS
+                                val candidate = "audio/letters/${payload}.mp3"
+                                val played = try { audioPlayer.playAsset(candidate) } catch (e: Exception) { false }
+                                if (!played) {
+                                    val json = try { assetLoader.loadJsonFromAssets("letter_${payload}.json") } catch (e: Exception) { null }
+                                    val path = json?.let { assetLoader.getLetterAudioPath(it) }
+                                    val ok = if (path != null) try { audioPlayer.playAsset(path) } catch (e: Exception) { false } else false
+                                    if (!ok) ttsManager.speak(payload)
+                                }
+                            }
                         }
                     }
-                }, progressStore = progressStore)
+                }, progressStore = progressStore, settingsStore = settingsStore)
             }
             composable("combined") {
                 CombinedSoundsScreen(onBack = { navController.popBackStack() }, onPlay = { phoneme ->

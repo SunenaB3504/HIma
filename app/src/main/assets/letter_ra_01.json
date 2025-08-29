@@ -1,0 +1,12 @@
+{
+  "id": "ra_letter_01",
+  "language": "hindi",
+  "char": "र",
+  "audio": "audio/letters/ra/र.mp3",
+  "stroke_anim": "animations/letters/ra/र.json",
+  "examples": [
+    {"word": "रोज", "emoji": "📅", "audio": "audio/words/roj.mp3", "meaning": "Daily", "sentence": "मैं रोज स्कूल जाता हूँ।"},
+    {"word": "रंग", "emoji": "🎨", "audio": "audio/words/rang.mp3", "meaning": "Color", "sentence": "यह रंग बहुत सुंदर है।"},
+    {"word": "रस", "emoji": "🧃", "audio": "audio/words/ras.mp3", "meaning": "Juice/Flavor", "sentence": "फल का रस मीठा है।"}
+  ]
+}

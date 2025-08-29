@@ -1,0 +1,12 @@
+{
+  "id": "sha_letter_01",
+  "language": "hindi",
+  "char": "श",
+  "audio": "audio/letters/sha/श.mp3",
+  "stroke_anim": "animations/letters/sha/श.json",
+  "examples": [
+    {"word": "शहर", "emoji": "🏙️", "audio": "audio/words/shahar.mp3", "meaning": "City", "sentence": "हम शहर में रहते हैं।"},
+    {"word": "शक्ति", "emoji": "💪", "audio": "audio/words/shakti.mp3", "meaning": "Power", "sentence": "उसमें बहुत शक्ति है।"},
+    {"word": "शांति", "emoji": "🕊️", "audio": "audio/words/shanti.mp3", "meaning": "Peace", "sentence": "हमें शांति चाहिए।"}
+  ]
+}

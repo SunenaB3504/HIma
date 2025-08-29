@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun MainMenuScreen(navController: NavController) {
-    HimaScaffold(title = "Hima — Main Menu", showBack = false, onBack = null) { _ ->
+    HimaScaffold(title = "HiMa — Main Menu", showBack = false, onBack = null) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -49,6 +49,9 @@ fun MainMenuScreen(navController: NavController) {
                     navController.navigate("settings")
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            TextButton(onClick = { navController.navigate("onboarding") }) { Text("Change Language", color = HimaPrimary) }
         }
     }
 }

@@ -1,0 +1,12 @@
+{
+  "id": "aa_letter_01",
+  "language": "hindi",
+  "char": "आ",
+  "audio": "audio/letters/a/आ.mp3",
+  "stroke_anim": "animations/letters/a/आ.json",
+  "examples": [
+    {"word": "आम", "emoji": "🥭", "audio": "audio/words/aam.mp3", "meaning": "Mango", "sentence": "आम मौसम में मिलता है।"},
+    {"word": "आटा", "emoji": "🌾", "audio": "audio/words/aata.mp3", "meaning": "Flour", "sentence": "रोटी के लिए आटा चाहिए।"},
+    {"word": "आनंद", "emoji": "😊", "audio": "audio/words/anand.mp3", "meaning": "Joy", "sentence": "बच्चों को खेल में आनंद आता है।"}
+  ]
+}

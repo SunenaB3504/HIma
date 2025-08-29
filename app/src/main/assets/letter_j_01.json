@@ -1,0 +1,12 @@
+{
+  "id": "j_letter_01",
+  "language": "hindi",
+  "char": "ज",
+  "audio": "audio/letters/j/ज.mp3",
+  "stroke_anim": "animations/letters/j/ज.json",
+  "examples": [
+    {"word": "जलेबी", "emoji": "🧁", "audio": "audio/words/jalebi.mp3", "meaning": "Jalebi (sweet)", "sentence": "त्योहार पर जलेबी बनी।"},
+    {"word": "जग", "emoji": "🫗", "audio": "audio/words/jag.mp3", "meaning": "Jug", "sentence": "पानी के लिए जग भरो।"},
+    {"word": "जहाज़", "emoji": "✈️", "audio": "audio/words/jahaz.mp3", "meaning": "Plane/Ship", "sentence": "हमने जहाज़ देखा।"}
+  ]
+}

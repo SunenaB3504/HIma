@@ -1,0 +1,12 @@
+{
+  "id": "bh_letter_01",
+  "language": "hindi",
+  "char": "भ",
+  "audio": "audio/letters/bh/भ.mp3",
+  "stroke_anim": "animations/letters/bh/भ.json",
+  "examples": [
+    {"word": "भालू", "emoji": "🐻", "audio": "audio/words/bhalu.mp3", "meaning": "Bear", "sentence": "भालू जंगल में रहता है।"},
+    {"word": "भाव", "emoji": "💭", "audio": "audio/words/bhav.mp3", "meaning": "Emotion/Price", "sentence": "उसकी भावनाएँ गहरी हैं।"},
+    {"word": "भोजन", "emoji": "🍛", "audio": "audio/words/bhojan.mp3", "meaning": "Meal", "sentence": "भोजन किचन में है।"}
+  ]
+}

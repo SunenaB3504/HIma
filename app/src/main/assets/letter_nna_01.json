@@ -1,0 +1,12 @@
+{
+  "id": "nna_letter_01",
+  "language": "hindi",
+  "char": "ण",
+  "audio": "audio/letters/nna/ण.mp3",
+  "stroke_anim": "animations/letters/nna/ण.json",
+  "examples": [
+    {"word": "णमक", "emoji": "🧂", "audio": "audio/words/namak.mp3", "meaning": "Salt", "sentence": "खाने में नमक डालें।"},
+    {"word": "पकवान", "emoji": "🍲", "audio": "audio/words/pakwan.mp3", "meaning": "Dish", "sentence": "माँ ने स्वादिष्ट पकवान बनाया।"},
+    {"word": "शरण", "emoji": "🏕️", "audio": "audio/words/sharan.mp3", "meaning": "Shelter", "sentence": "सभी को शरण मिली।"}
+  ]
+}

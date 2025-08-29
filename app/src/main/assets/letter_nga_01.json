@@ -1,0 +1,12 @@
+{
+  "id": "nga_letter_01",
+  "language": "hindi",
+  "char": "ङ",
+  "audio": "audio/letters/nga/ङ.mp3",
+  "stroke_anim": "animations/letters/nga/ङ.json",
+  "examples": [
+    {"word": "ङाल", "emoji": "🔖", "audio": "audio/words/ngal.mp3", "meaning": "(example placeholder)", "sentence": "यह शब्द दुर्लभ है।"},
+    {"word": "ङोप", "emoji": "🔤", "audio": "audio/words/ngop.mp3", "meaning": "(placeholder)", "sentence": "यह एक नमूना वाक्य है।"},
+    {"word": "ङु", "emoji": "📎", "audio": "audio/words/ngu.mp3", "meaning": "(placeholder)", "sentence": "इस फ़ाइल का उद्देश्य उदाहरण दिखाना है।"}
+  ]
+}

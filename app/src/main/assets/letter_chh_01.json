@@ -1,0 +1,12 @@
+{
+  "id": "chh_letter_01",
+  "language": "hindi",
+  "char": "छ",
+  "audio": "audio/letters/chh/छ.mp3",
+  "stroke_anim": "animations/letters/chh/छ.json",
+  "examples": [
+    {"word": "छाता", "emoji": "☂️", "audio": "audio/words/chata.mp3", "meaning": "Umbrella", "sentence": "बारिश में छाता उपयोगी होता है।"},
+    {"word": "छोटी", "emoji": "📏", "audio": "audio/words/choti.mp3", "meaning": "Small", "sentence": "यह चीज छोटी है।"},
+    {"word": "छाछ", "emoji": "🥛", "audio": "audio/words/chaach.mp3", "meaning": "Buttermilk", "sentence": "गर्मियों में छाछ ठंडी होती है।"}
+  ]
+}

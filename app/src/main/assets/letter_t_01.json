@@ -1,0 +1,12 @@
+{
+  "id": "t_letter_01",
+  "language": "hindi",
+  "char": "ट",
+  "audio": "audio/letters/t/ट.mp3",
+  "stroke_anim": "animations/letters/t/ट.json",
+  "examples": [
+    {"word": "टमाटर", "emoji": "🍅", "audio": "audio/words/tamatar.mp3", "meaning": "Tomato", "sentence": "टमाटर लाल होता है।"},
+    {"word": "टिकिट", "emoji": "🎫", "audio": "audio/words/ticket.mp3", "meaning": "Ticket", "sentence": "मुझे टिकट खरीदना है।"},
+    {"word": "टब", "emoji": "🛁", "audio": "audio/words/tub.mp3", "meaning": "Tub", "sentence": "बच्चे टब में खेल रहे हैं।"}
+  ]
+}

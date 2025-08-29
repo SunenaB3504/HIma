@@ -1,0 +1,12 @@
+{
+  "id": "jh_letter_01",
+  "language": "hindi",
+  "char": "झ",
+  "audio": "audio/letters/jh/झ.mp3",
+  "stroke_anim": "animations/letters/jh/झ.json",
+  "examples": [
+    {"word": "झरना", "emoji": "💧", "audio": "audio/words/jharna.mp3", "meaning": "Waterfall", "sentence": "पहाड़ पर झरना बह रहा है।"},
+    {"word": "झूला", "emoji": "🪂", "audio": "audio/words/jhula.mp3", "meaning": "Swing", "sentence": "बच्चे झूले पर खेल रहे हैं।"},
+    {"word": "झाँकी", "emoji": "🎭", "audio": "audio/words/jhanki.mp3", "meaning": "Display", "sentence": "मेला में झाँकी लगी थी।"}
+  ]
+}

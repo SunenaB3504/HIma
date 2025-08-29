@@ -1,0 +1,12 @@
+{
+  "id": "ss_letter_01",
+  "language": "hindi",
+  "char": "ष",
+  "audio": "audio/letters/ss/ष.mp3",
+  "stroke_anim": "animations/letters/ss/ष.json",
+  "examples": [
+    {"word": "षट्कोण", "emoji": "🔺", "audio": "audio/words/shatkone.mp3", "meaning": "Hexagon", "sentence": "यह आकृति एक षट्कोण है।"},
+    {"word": "षड्यंत्र", "emoji": "🕵️", "audio": "audio/words/shadyantra.mp3", "meaning": "Conspiracy", "sentence": "किसी ने षड्यंत्र रचा।"},
+    {"word": "विष", "emoji": "☠️", "audio": "audio/words/vish.mp3", "meaning": "Poison", "sentence": "विष से सावधान रहें।"}
+  ]
+}

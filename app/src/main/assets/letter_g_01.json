@@ -1,0 +1,12 @@
+{
+  "id": "g_letter_01",
+  "language": "hindi",
+  "char": "ग",
+  "audio": "audio/letters/g/ग.mp3",
+  "stroke_anim": "animations/letters/g/ग.json",
+  "examples": [
+    {"word": "गुब्बारा", "emoji": "🎈", "audio": "audio/words/gubbara.mp3", "meaning": "Balloon", "sentence": "बच्चे गुब्बारे उड़ा रहे हैं।"},
+    {"word": "गाना", "emoji": "🎵", "audio": "audio/words/gana.mp3", "meaning": "Song", "sentence": "वह अच्छा गाना गाती है।"},
+    {"word": "गली", "emoji": "🛣️", "audio": "audio/words/gali.mp3", "meaning": "Street", "sentence": "हम गली में टहल रहे थे।"}
+  ]
+}

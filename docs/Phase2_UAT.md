@@ -78,6 +78,7 @@ Run these before full UAT. If a smoke test fails, stop and file a blocker.
 3. With "Use device TTS" = ON, Listen produces audible speech.
 4. Trace -> Mark Complete increments the star count.
 5. Settings toggle persists after app restart.
+6. Letter detail shows example vocabulary (≥3 items) with English meaning, an example sentence in the selected language, and a Listen button per item.
 
 Detailed test cases
 -------------------
@@ -123,6 +124,31 @@ TC-09 — Navigation/back-stack
 TC-10 — Edge/stress cases
 - Cases: rapid Mark Complete presses, invalid `letter/{letter}` params, toggling TTS while audio plays.
 - Expected: No crashes; logged errors if failures occur.
+
+TC-11 — Letter vocabulary: display, meaning, sentence, and per-item Listen
+- Preconditions: Assets or sample JSON for the letter are present in `app/src/main/assets/` and the schema includes `meaning` and `sentence` fields.
+- Steps:
+  1. Open Alphabet → select a letter (e.g., 'अ').
+  2. Scroll to the example-words section.
+  3. Verify at least three example words are listed.
+  4. For each example word: confirm the English meaning is visible, confirm a short example sentence in Hindi/Marathi is visible, and tap the per-item "Listen" button.
+- Expected:
+  - At least 3 example entries appear for the letter (or a clear message if fewer exist in content).
+  - Each entry shows the word (native script), its English meaning, and a short example sentence in the selected instruction language.
+  - Tapping "Listen" for an entry plays the bundled audio for that word/sentence if present; otherwise device offline TTS speaks the word and sentence in the selected language. No crashes.
+
+TC-12 — Identify-word exercise (listen-and-choose)
+- Preconditions: Identify exercise is accessible from the Letter Practice or Activities screen; `ProgressStore` is writable.
+- Steps:
+  1. Launch the Identify Word exercise for a chosen letter or vocab set.
+  2. Tap the Play/Start button so the app speaks the target word (audio or TTS).
+  3. Choose the candidate you believe matches the spoken word.
+  4. Observe feedback; if incorrect, retry as allowed, then reveal the correct answer.
+  5. If correct, verify a star is awarded and persisted; repeat the exercise to confirm persistence.
+- Expected:
+  - The app speaks the target word (and optionally a short example sentence) using bundled audio or offline TTS.
+  - Candidate options (3–4) are visible and tappable; selecting the correct option yields positive feedback and awards a star which is persisted to `ProgressStore`.
+  - Incorrect selections show gentle negative feedback and permit retry or reveal after attempt; no crashes.
 
 Traceability matrix
 -------------------

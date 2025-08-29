@@ -1,0 +1,12 @@
+{
+  "id": "gh_letter_01",
+  "language": "hindi",
+  "char": "घ",
+  "audio": "audio/letters/gh/घ.mp3",
+  "stroke_anim": "animations/letters/gh/घ.json",
+  "examples": [
+    {"word": "घड़ा", "emoji": "🏺", "audio": "audio/words/ghada.mp3", "meaning": "Pitcher", "sentence": "घड़ा पानी से भरा है।"},
+    {"word": "घोड़ा", "emoji": "🐎", "audio": "audio/words/ghoda.mp3", "meaning": "Horse", "sentence": "घोड़ा तेज दौड़ता है।"},
+    {"word": "घंटी", "emoji": "🔔", "audio": "audio/words/ghanti.mp3", "meaning": "Bell", "sentence": "स्कूल की घंटी बजी।"}
+  ]
+}

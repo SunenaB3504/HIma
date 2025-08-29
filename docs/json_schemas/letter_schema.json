@@ -13,11 +13,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["word", "emoji", "audio"],
+        "required": ["word", "emoji", "audio", "meaning", "sentence"],
         "properties": {
           "word": {"type": "string"},
           "emoji": {"type": "string"},
-          "audio": {"type": "string"}
+          "audio": {"type": "string"},
+          "meaning": {"type": "string", "description": "Short English meaning"},
+          "sentence": {"type": "string", "description": "Short example sentence in the content language (Hindi/Marathi)"}
         }
       }
     }

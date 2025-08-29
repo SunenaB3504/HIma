@@ -1,0 +1,12 @@
+{
+  "id": "ya_letter_01",
+  "language": "hindi",
+  "char": "य",
+  "audio": "audio/letters/ya/य.mp3",
+  "stroke_anim": "animations/letters/ya/य.json",
+  "examples": [
+    {"word": "यात्रा", "emoji": "🧳", "audio": "audio/words/yatra.mp3", "meaning": "Journey", "sentence": "हम यात्रा पर जा रहे हैं।"},
+    {"word": "युवा", "emoji": "🧑", "audio": "audio/words/yuva.mp3", "meaning": "Youth", "sentence": "युवा वर्ग उत्साह से भरा है।"},
+    {"word": "योजना", "emoji": "🗂️", "audio": "audio/words/yojana.mp3", "meaning": "Plan", "sentence": "सरकार ने नई योजना बनाई।"}
+  ]
+}

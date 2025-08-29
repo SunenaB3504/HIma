@@ -5,7 +5,8 @@
   "audio": "audio/letters/h/अ.mp3",
   "stroke_anim": "animations/letters/h/अ.json",
   "examples": [
-    {"word": "अदरक", "emoji": "🫚", "audio": "audio/words/adarak.mp3"},
-    {"word": "आम", "emoji": "🍑", "audio": "audio/words/aam.mp3"}
+    {"word": "अदरक", "emoji": "🫚", "audio": "audio/words/adarak.mp3", "meaning": "Ginger", "sentence": "अदरक से स्वाद बढ़ता है।"},
+    {"word": "आम", "emoji": "🍑", "audio": "audio/words/aam.mp3", "meaning": "Mango", "sentence": "आम मीठा होता है।"},
+    {"word": "अनार", "emoji": "🍎", "audio": "audio/words/anar.mp3", "meaning": "Pomegranate", "sentence": "अनार लाल और रसीला होता है।"}
   ]
 }

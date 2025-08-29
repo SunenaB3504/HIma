@@ -1,0 +1,12 @@
+{
+  "id": "m_letter_01",
+  "language": "hindi",
+  "char": "म",
+  "audio": "audio/letters/m/म.mp3",
+  "stroke_anim": "animations/letters/m/म.json",
+  "examples": [
+    {"word": "माया", "emoji": "✨", "audio": "audio/words/maya.mp3", "meaning": "Magic", "sentence": "माया से सब आश्चर्यचकित हुए।"},
+    {"word": "मछली", "emoji": "🐟", "audio": "audio/words/machhli.mp3", "meaning": "Fish", "sentence": "तालाब में मछली तैर रही है।"},
+    {"word": "मिठाई", "emoji": "🍬", "audio": "audio/words/mithai.mp3", "meaning": "Sweet", "sentence": "त्योहार पर मिठाई खिलाई जाती है।"}
+  ]
+}

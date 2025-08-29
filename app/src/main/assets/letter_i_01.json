@@ -1,0 +1,12 @@
+{
+  "id": "i_letter_01",
+  "language": "hindi",
+  "char": "इ",
+  "audio": "audio/letters/i/इ.mp3",
+  "stroke_anim": "animations/letters/i/इ.json",
+  "examples": [
+    {"word": "इमली", "emoji": "🌿", "audio": "audio/words/imli.mp3", "meaning": "Tamarind", "sentence": "इमली खट्टी होती है।"},
+    {"word": "इमली का चटनी", "emoji": "🍯", "audio": "audio/words/imlichutney.mp3", "meaning": "Tamarind chutney", "sentence": "समोसे के साथ इमली की चटनी पसंद है।"},
+    {"word": "इंजीनियर", "emoji": "👷", "audio": "audio/words/engineer.mp3", "meaning": "Engineer", "sentence": "वह एक अच्छा इंजीनियर है।"}
+  ]
+}

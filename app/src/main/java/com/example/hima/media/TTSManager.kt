@@ -61,6 +61,32 @@ class TTSManager(private val context: Context) : TextToSpeech.OnInitListener {
         }
     }
 
+    /**
+     * Speak text after attempting to set a preferred locale.
+     * localeTag should be a BCP-47 tag like "mr" or "hi". If null, existing language is used.
+     */
+    fun speakWithLocale(text: String, localeTag: String?) {
+        if (!ready) {
+            Log.w("TTS", "TTS not ready yet, queueing text='$text'")
+            pending.add(text)
+            return
+        }
+        try {
+            if (!localeTag.isNullOrBlank()) {
+                try {
+                    val locale = Locale(localeTag)
+                    val res = tts?.setLanguage(locale)
+                    Log.d("TTS", "setLanguage result=$res for locale=$locale")
+                } catch (e: Exception) {
+                    Log.w("TTS", "failed to set requested locale=$localeTag, using current locale", e)
+                }
+            }
+            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "tts_now")
+        } catch (e: Exception) {
+            Log.e("TTS", "speak failed", e)
+        }
+    }
+
     fun shutdown() {
         try {
             tts?.stop()
